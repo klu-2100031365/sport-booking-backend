@@ -19,7 +19,7 @@ app.use(express.json());  // Middleware for parsing JSON requests
 
 // CORS Configuration: Allowing only the frontend URL to make requests
 const corsOptions = {
-  origin: 'https://sport-booking-frontend-9r5p4x1gp-sudeepvarmas-projects.vercel.app',  // Your Vercel frontend URL
+  origin: 'https://sport-booking-frontend.vercel.app',  // Your Vercel frontend URL
 };
 app.use(cors(corsOptions));  // Applying CORS middleware with the defined options
 
