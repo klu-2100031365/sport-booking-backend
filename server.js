@@ -27,7 +27,12 @@ app.use(cors(corsOptions));  // Applying CORS middleware with the defined option
 app.use('/api/auth', authRoutes);  // Authentication routes
 app.use('/api/admin', adminRoutes);  // Admin routes
 app.use('/api', customerRoutes);  // Customer routes
-app.use('/api/booking', bookingRoutes);  // Booking routes
+app.use('/api/booking', bookingRoutes);  // Booking routes// Health Check endpoint
+app.get("/health", (req, res) => {
+  res.status(200).json({ 
+    status: "healthy",
+  });
+})
 
 // Start the server
 app.listen(4000, () => {
