@@ -1,27 +1,33 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import cors from 'cors';
-import connectDB from './config/db.js';
-import authRoutes from './routes/authRoutes.js'; // Import the auth routes
-import adminRoutes from './routes/adminRoutes.js';
-import customerRoutes from './routes/customerRoutes.js';
-import bookingRoutes from './routes/bookingRoutes.js'; // Add the booking routes
+import cors from 'cors';  // Importing CORS
+import connectDB from './config/db.js';  // Database connection
+import authRoutes from './routes/authRoutes.js';  // Authentication routes
+import adminRoutes from './routes/adminRoutes.js';  // Admin routes
+import customerRoutes from './routes/customerRoutes.js';  // Customer routes
+import bookingRoutes from './routes/bookingRoutes.js';  // Booking routes
 
-dotenv.config();
+dotenv.config();  // Loading environment variables
 
 const app = express();
 
-// Connect to database
+// Connect to the database
 connectDB();
 
 // Middleware
-app.use(express.json()); // For parsing JSON data
-app.use(cors()); // Enable CORS
+app.use(express.json());  // Middleware for parsing JSON requests
+
+// CORS Configuration: Allowing only the frontend URL to make requests
+const corsOptions = {
+  origin: 'https://sport-booking-frontend-9r5p4x1gp-sudeepvarmas-projects.vercel.app',  // Your Vercel frontend URL
+};
+app.use(cors(corsOptions));  // Applying CORS middleware with the defined options
 
 // Routes
-app.use('/api/auth', authRoutes); 
-app.use('/api/admin', adminRoutes);  // Mount admin routes here
-app.use('/api', customerRoutes);  // Mount customer routes under /api
+app.use('/api/auth', authRoutes);  // Authentication routes
+app.use('/api/admin', adminRoutes);  // Admin routes
+app.use('/api', customerRoutes);  // Customer routes
+app.use('/api/booking', bookingRoutes);  // Booking routes
 
 // Start the server
 app.listen(4000, () => {
